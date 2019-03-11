@@ -5,12 +5,11 @@ from email.mime.text import MIMEText
 #DHT setup
 sensor0 = _dht.DHT22
 sensor1 = _dht.DHT22
-pin0 = 16
-pin1 = 12
+pins = [16, 12]
 
-def getTemp():
-    h0, t0 = _dht.read_retry(sensor0, pin0)
-    h1, t1 = _dht.read_retry(sensor1, pin1)
+def getAvgTemp():
+    h0, t0 = _dht.read_retry(sensor0, pins[0])
+    h1, t1 = _dht.read_retry(sensor1, pins[1])
     if t0 is not None and h0 is not None and t1 is not None and h1 is not None:
         humidity = (h0+h1)/2
         temperature = (t0+t1)/2
@@ -21,6 +20,16 @@ def getTemp():
         humidity = -1
 
     return temperature,humidity
+
+def getTemp(sensor): 
+    h0, t0 = _dht.read_retry(sensor0, pins[sensor])
+    if t0 is not None and h0 is not None:
+        t0 = t0 * 9/5.0 + 32
+    else:
+        t0 = -1
+        h0 = -1
+
+    return t0,h0
 
 
 def sendMsg():
