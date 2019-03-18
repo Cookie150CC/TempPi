@@ -33,10 +33,10 @@ def getTemp(sensor):
 
 
 def sendMsg():
-    usr = "cooke9619@gmail.com"
-    pwd = "praise789"
+    usr = "user@gmail.com"
+    pwd = "pwd"
 
-    vtext = "2488401744@vtext.com"
+    vtext = "5551235555@vtext.com"
     msg = "Temp is too high"
 
     mail = MIMEText("""From: %s
