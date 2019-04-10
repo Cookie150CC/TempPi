@@ -20,14 +20,20 @@ from email.mime.text import MIMEText
 
 class Messenger():
 
-    usr = "user@gmail.com"
-    pwd = "pwd"
-    vtext = "15551235555@vtext.com"
+    usr = "user@email.com"
+    pwd = "secret"
+    vtext = "@vtext.com"
     msg = "Temp is too high"
 
-    def sendMsg(self):
+    def sendMsg(self,configObj):
 
         retval = 0 #Ok
+
+        self.usr = configObj.emailAddress
+        self.pwd = configObj.emailPassword
+        if configObj.phoneCarrier == "verizon":
+            self.vtext = configObj.phoneNumber + "@vtext.com"
+        self.msg = "Temp is too high"
 
         mail = MIMEText("""From: %s
         To: %s
