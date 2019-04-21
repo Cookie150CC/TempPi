@@ -15,6 +15,7 @@
 
 import TSensor
 import Messenger
+import Config
 import unittest
 
 class TestTSensor(unittest.TestCase):
@@ -39,8 +40,12 @@ class TestTSensor(unittest.TestCase):
 class TestMessenger(unittest.TestCase):
     
     def test_send_msg(self):
+        configObj = Config.Config()
+        configObj.openJSON()
         messengerObj = Messenger.Messenger()
-        retval = messengerObj.sendMsg()
+        tSensorObj = TSensor.TSensor()
+        tAvg,hAvg = tSensorObj.getAvgTemp()
+        retval = messengerObj.sendMsg(configObj,tAvg)
         self.assertEquals(retval,0,'Error sending message from sendMsg()')
 
 if __name__ == '__main__':

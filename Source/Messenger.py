@@ -23,9 +23,9 @@ class Messenger():
     usr = "user@email.com"
     pwd = "secret"
     vtext = "@vtext.com"
-    msg = "Temp is too high"
+    msg = "Temperature is too high: "
 
-    def sendMsg(self,configObj):
+    def sendMsg(self,configObj,temp):
 
         retval = 0 #Ok
 
@@ -33,12 +33,10 @@ class Messenger():
         self.pwd = configObj.emailPassword
         if configObj.phoneCarrier == "verizon":
             self.vtext = configObj.phoneNumber + "@vtext.com"
-        self.msg = "Temp is too high"
 
-        mail = MIMEText("""From: %s
-        To: %s
-        Subject: txt alert
-        Body: %s TEST""" % (self.usr,self.vtext,self.msg))
+        mail = MIMEText("""%s %s
+        Server Alert!
+        %s %.1fF""" % (self.usr,self.vtext,self.msg,temp))
 
         try:
             server = smtplib.SMTP('smtp.gmail.com',587)

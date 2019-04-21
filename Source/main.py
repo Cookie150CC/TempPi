@@ -12,7 +12,7 @@
 
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-_author__ = "Brittain Cooke"
+__author__ = "Brittain Cooke"
 
 #imports
 import sys
@@ -97,7 +97,7 @@ def doMain():
         
             global sendFlag
             if t > threshold and sendFlag is True:
-                messengerObj.sendMsg(configObj)
+                messengerObj.sendMsg(configObj,t)
                 sendFlag = False
                 threading.Timer(sendInterval, doMain).start()   
     
